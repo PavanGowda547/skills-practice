@@ -1109,3 +1109,335 @@ Important: By default, `git stash` saves tracked-file changes. Use `git stash -u
 
 ## 15. `git clean`
 
+Remove untracked files.
+Removes files from your project folder that Git is not tracking.
+
+### Step-by-step practical implementation
+
+Step 1. Open your project
+
+Open your Git project in VS Code.
+
+Step 2. Create an untracked file
+
+Create a new file:
+
+```text
+temporary.txt
+```
+
+Add some content:
+
+```text
+This is a temporary file.
+```
+
+Save it.
+
+Step 3. Check Git status
+
+Run:
+
+```bash
+git status
+```
+
+You should see:
+
+```bash
+Untracked files:
+  temporary.txt
+```
+
+Step 4. Preview files that Git would remove
+
+Run:
+
+```bash
+git clean -n
+```
+
+Expected output:
+
+```bash
+Would remove temporary.txt
+```
+
+The `-n` option means preview only. It does not delete anything.
+
+Step 5. Actually remove the file
+
+Run:
+
+```bash
+git clean -f
+```
+
+The `-f` option means force removal.
+
+Step 6. Verify the result
+
+Run:
+
+```bash
+git status
+```
+
+You should see:
+
+```bash
+nothing to commit, working tree clean
+```
+
+Also check your project folder. `temporary.txt` should be gone.
+
+Untracked file removed\!### Other useful variations
+
+| Command | Purpose |
+| --- | --- |
+| `git clean -n` | Preview untracked files to be removed |
+| `git clean -f` | Remove untracked files |
+| `git clean -fd` | Remove untracked files and directories |
+| `git clean -i` | Interactively choose what to remove |
+
+Important `git clean -f` permanently deletes untracked files. Always run `git clean -n` first.
+
+### Remember
+
+- `git rm` → Removes tracked files.
+- `git clean` → Removes untracked files.
+
+## 16. `git reflog`
+
+View reference history.
+
+Shows the history of where your Git HEAD and branch references have moved.
+
+### Step-by-step practical implementation
+
+Step 1. Open your project terminal
+
+Make sure you are inside your Git repository.
+
+Step 2. Execute the command
+
+Run:
+
+```bash
+git reflog
+```
+
+Step 3. Check the output
+
+You should see something similar to:
+
+```bash
+a1b2c3d HEAD@{0}: commit: Update heading
+d4e5f6g HEAD@{1}: commit: Initial commit
+h7i8j9k HEAD@{2}: reset: moving to HEAD~1
+```
+
+Step 4. Understand the output
+
+- `HEAD@{0}` → Most recent HEAD position.
+- `HEAD@{1}` → Previous HEAD position.
+- `commit` → A commit operation.
+- `reset` → A reset operation.
+- `moving to HEAD~1` → HEAD moved back one commit.
+
+Step 5. View a shorter history
+
+Run:
+
+```bash
+git reflog --oneline
+```
+
+This displays the reference history in a shorter format.
+
+Step 6. Practise finding a previous commit
+
+Run:
+
+```bash
+git reflog
+```
+
+Copy an earlier commit ID from the output.
+
+Then run:
+
+```bash
+git show COMMIT_ID
+```
+
+Replace `COMMIT_ID` with the actual ID.
+
+This lets you inspect that previous commit.
+
+### Remember
+
+| Command | Purpose |
+| --- | --- |
+| `git reflog` | Displays reference history |
+| `git reflog --oneline` | Displays shorter reference history |
+| `git show COMMIT_ID` | Inspects a previous commit |
+
+Important: `git reflog` is especially useful when you accidentally move your branch using commands like `git reset`.
+
+## 17. `git config`
+
+Configure Git. Allows you to set your username, email address, and other Git preferences.
+
+### Step-by-step practical implementation
+
+Step 1. Check your current Git username
+
+Run:
+
+```bash
+git config --global user.name
+```
+
+This displays your configured Git username, if one exists.
+
+Step 2. Set your Git username
+
+Run:
+
+```bash
+git config --global user.name "John"
+```
+
+Replace `John` with your preferred name.
+
+Step 3. Set your Git email
+
+Run:
+
+```bash
+git config --global user.email "john@example.com"
+```
+
+Replace this with your own email address.
+
+Step 4. Verify your username
+
+Run:
+
+```bash
+git config --global user.name
+```
+
+Expected output:
+
+```bash
+John
+```
+
+Step 5. Verify your email
+
+Run:
+
+```bash
+git config --global user.email
+```
+
+Expected output:
+
+```bash
+john@example.com
+```
+
+Step 6. View all your Git configurations
+
+Run:
+
+```bash
+git config --list
+```
+
+You should see your configured username, email, and other settings.
+
+### Other useful variations
+
+| Command | Purpose |
+| --- | --- |
+| `git config --global user.name "John"` | Set username globally |
+| `git config --global user.email "john@example.com"` | Set email globally |
+| `git config --local user.name "John"` | Set username for current repository |
+| `git config --list` | View all configurations |
+| `git config --global --edit` | Edit global configuration |
+
+### Understand `--global` vs `--local`
+
+- `--global` → Applies to all your Git repositories for your user account.
+- `--local` → Applies only to the current Git repository.
+
+## 18. `git help`
+
+Access Git documentation.
+
+Displays instructions and documentation to help you understand how Git commands work.
+
+### Step-by-step practical implementation
+
+Step 1. Open your project terminal
+
+Open the terminal in VS Code.
+
+Step 2. Get general Git help
+
+Run:
+
+```bash
+git help
+```
+
+This displays general Git documentation and available commands.
+
+Step 3. Get help for a specific command
+
+Run:
+
+```bash
+git help commit
+```
+
+This opens the documentation explaining the `git commit` command.
+
+Step 4. Try another command
+
+Run:
+
+```bash
+git help status
+```
+
+This displays documentation for `git status`.
+
+Step 5. Use the quick help option
+
+Run:
+
+```bash
+git commit -h
+```
+
+This displays a shorter list of options for the commit command directly in your terminal.
+
+### Other useful variations
+
+| Command | Purpose |
+| --- | --- |
+| `git help` | General Git documentation |
+| `git help commit` | Detailed commit documentation |
+| `git help status` | Detailed status documentation |
+| `git commit -h` | Short command help |
+| `git help config` | Configuration documentation |
+
+### Remember
+
+- `git help` → Learn about Git commands.
+- `git help COMMAND` → Learn about a specific command.
+- `git COMMAND -h` → Get quick command instructions.
