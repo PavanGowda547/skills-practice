@@ -1,4 +1,4 @@
-# Git Fundamentals
+# 1. Git Fundamentals
 
 ### Git
 Git is a free, open-source version control system used to track changes in your code. It helps developers save different versions of their projects, go back to previous versions, and collaborate without losing their work.
