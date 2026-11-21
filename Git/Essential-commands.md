@@ -1,5 +1,4 @@
-
-# Essential Git Commands
+# 2. Essential Git Commands
 
 | Command | Purpose | Simple Explanation | Example |
 |---|---|---|---|
