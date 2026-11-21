@@ -716,3 +716,396 @@ Important Avoid `git reset --hard` while learning. It can permanently discard wo
 
 - `git restore` → Discards file modifications or unstages files.
 - `git reset` → Moves HEAD or removes files from staging, depending on the option.
+
+## 11. `git revert`
+
+Undo changes through a new commit.
+Reverses the changes made by an earlier commit without deleting that commit from Git history.
+
+### Step-by-step practical implementation
+
+Step 1. Check your commit history
+
+Run:
+
+```bash
+git log --oneline
+```
+
+You should see something similar to:
+
+```bash
+a1b2c3d Update heading
+d4e5f6g Initial commit
+```
+
+Step 2. Choose a commit to revert
+
+For practice, choose the `Update heading` commit.
+
+Copy its commit ID.
+
+Step 3. Execute the revert command
+
+Run:
+
+```bash
+git revert COMMIT_ID
+```
+
+Replace `COMMIT_ID` with the actual ID.
+
+Step 4. Complete the revert
+
+Git may open a text editor asking for a commit message.
+
+- Keep the default revert message.
+- Save and close the editor.
+
+Alternatively, use:
+
+```bash
+git revert --no-edit COMMIT_ID
+```
+
+Step 5. Check the result
+
+Run:
+
+```bash
+git status
+```
+
+Then:
+
+```bash
+git log --oneline
+```
+
+You should see a new commit with a message similar to:
+
+```bash
+Revert "Update heading"
+```
+
+Step 6. Check your file
+
+Open `index.html`.
+
+The changes introduced by the reverted commit should now be undone.
+
+### Remember
+
+| Command | Purpose |
+| --- | --- |
+| `git revert COMMIT_ID` | Reverses a particular commit |
+| `git revert --no-edit COMMIT_ID` | Reverts without opening the commit message editor |
+
+### Important difference
+
+- `git reset` → Moves the branch pointer to another commit.
+- `git revert` → Creates a new commit that reverses previous changes.
+
+Note: If you have uncommitted changes, commit or safely set them aside before practising revert.
+
+## 12. `git rm`
+
+Remove tracked files.
+
+Deletes a tracked file from your project and stages its removal for the next commit.
+
+### Step-by-step practical implementation
+
+Step 1. Create a new file
+
+Inside your project, create:
+
+```text
+old-file.txt
+```
+
+Step 2. Add some content
+
+```text
+This is a file I want to delete.
+```
+
+Save the file.
+
+Step 3. Add the file to Git
+
+Run:
+
+```bash
+git add old-file.txt
+```
+
+Step 4. Commit the file
+
+Run:
+
+```bash
+git commit -m "Add old file"
+```
+
+Now Git is tracking this file.
+
+Step 5. Remove the file
+
+Run:
+
+```bash
+git rm old-file.txt
+```
+
+Step 6. Check the status
+
+Run:
+
+```bash
+git status
+```
+
+You should see:
+
+```bash
+Changes to be committed:
+  deleted: old-file.txt
+```
+
+Step 7. Commit the deletion
+
+Run:
+
+```bash
+git commit -m "Remove old file"
+```
+
+Step 8. Verify the result
+
+Run:
+
+```bash
+git status
+```
+
+You should see:
+
+```bash
+nothing to commit, working tree clean
+```
+
+File successfully removed\!### Other useful variations
+
+| Command | Purpose |
+| --- | --- |
+| `git rm old-file.txt` | Deletes the file and stages deletion |
+| `git rm --cached old-file.txt` | Removes file from Git tracking but keeps it on your computer |
+| `git rm -r folder-name` | Removes a tracked folder and its contents |
+
+Important: `git rm` removes the file from your working directory too. Commit the deletion to save that change in Git history.
+
+## 13. `git mv`
+
+Rename or move tracked files.
+
+Renames a file or moves it to another folder and automatically stages the change.
+
+### Step-by-step practical implementation
+
+Step 1. Create a new file
+
+Inside your project, create:
+
+```text
+old.txt
+```
+
+Step 2. Add some content
+
+```text
+I am learning Git mv command.
+```
+
+Save the file.
+
+Step 3. Start tracking the file
+
+Run:
+
+```bash
+git add old.txt
+```
+
+Step 4. Commit the file
+
+Run:
+
+```bash
+git commit -m "Add old text file"
+```
+
+Step 5. Rename the file
+
+Run:
+
+```bash
+git mv old.txt new.txt
+```
+
+Git renames `old.txt` to `new.txt` and stages the change.
+
+Step 6. Check the status
+
+Run:
+
+```bash
+git status
+```
+
+You should see something similar to:
+
+```bash
+Changes to be committed:
+  renamed: old.txt -> new.txt
+```
+
+Step 7. Commit the rename
+
+Run:
+
+```bash
+git commit -m "Rename old.txt to new.txt"
+```
+
+Step 8. Verify the result
+
+Check your project folder.
+
+You should now have:
+
+```text
+new.txt
+```
+
+The old filename should no longer exist.
+
+### Other useful variations
+
+Rename a file:
+
+```bash
+git mv old.txt new.txt
+```
+
+Move a file into another folder:
+
+```bash
+git mv new.txt documents/new.txt
+```
+
+Make sure the `documents` folder already exists.
+
+### Remember
+
+- `git mv` renames or moves a tracked file.
+- It automatically stages the change.
+- You still need `git commit` to save the change in Git history.
+
+## 14. `git stash`
+
+Temporarily save changes.
+
+Temporarily stores your uncommitted changes so you can work on something else without committing them.
+
+### Step-by-step practical implementation
+
+Step 1. Open your project
+
+Open `index.html` in VS Code.
+
+Step 2. Make some changes
+
+Add this heading:
+
+```html
+<h1>Learning Git Stash</h1>
+```
+
+Save the file.
+
+Step 3. Check the status
+
+Run:
+
+```bash
+git status
+```
+
+You should see:
+
+```bash
+Changes not staged for commit:
+  modified: index.html
+```
+
+Step 4. Execute the stash command
+
+Run:
+
+```bash
+git stash
+```
+
+Git temporarily saves your changes.
+
+Step 5. Verify the result
+
+Run:
+
+```bash
+git status
+```
+
+You should see:
+
+```bash
+nothing to commit, working tree clean
+```
+
+Your uncommitted changes are no longer in the working directory.
+
+Step 6. Bring your changes back
+
+Run:
+
+```bash
+git stash pop
+```
+
+This restores your previously stashed changes and removes that stash entry.
+
+Step 7. Verify your file
+
+Open `index.html`.
+
+You should see your heading:
+
+```html
+<h1>Learning Git Stash</h1>
+```
+
+Changes restored\!### Other useful variations
+
+| Command | Purpose |
+| --- | --- |
+| `git stash` | Temporarily save changes |
+| `git stash list` | View saved stashes |
+| `git stash apply` | Restore changes but keep the stash entry |
+| `git stash pop` | Restore changes and remove the stash entry |
+| `git stash drop` | Delete a stash entry |
+
+Important: By default, `git stash` saves tracked-file changes. Use `git stash -u` if you also want to stash untracked files.
+
+## 15. `git clean`
+
